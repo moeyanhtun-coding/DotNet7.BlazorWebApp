@@ -40,7 +40,7 @@ public class Result<T>
         return new Result<T> { Success = false, Message = ex.ToString() };
     }
 
-    public static Result<T> ExecutResult(int result)
+    public static Result<T> ExecuteResult(int result)
     {
         return result > 0 ? SuccessResult() : FailureResult();
     }
