@@ -110,11 +110,11 @@ public class BL_BLog
     {
         if (model is null)
             throw new Exception("Mode can't be null!");
-        if (!string.IsNullOrEmpty(model.BlogTitle))
+        if (string.IsNullOrEmpty(model.BlogTitle))
             throw new Exception("Blog Title can't be null!");
-        if (!string.IsNullOrEmpty(model.BlogAuthor))
+        if (string.IsNullOrEmpty(model.BlogAuthor))
             throw new Exception("Blog Author can't be null!");
-        if (!string.IsNullOrEmpty(model.BlogContent))
+        if (string.IsNullOrEmpty(model.BlogContent))
             throw new Exception("Blog Content can't be null!");
     }
     #endregion
