@@ -20,7 +20,7 @@ namespace DotNet7.BlazorWebApp.WebApi.Controllers.Blog
         [HttpGet("{pageNo}/{pageSize}")]
         public async Task<IActionResult> GetBlog(int pageNo, int pageSize)
         {
-            var responseModel = new Result<List<BlogModel>>();
+            var responseModel = new Result<BlogResponseModel>();
             try
             {
                 responseModel = await _bL_Blog.GetBlog(pageNo, pageSize);
@@ -28,7 +28,7 @@ namespace DotNet7.BlazorWebApp.WebApi.Controllers.Blog
             }
             catch (Exception ex)
             {
-                responseModel = Result<List<BlogModel>>.FailureResult(ex.ToString());
+                responseModel = Result<BlogResponseModel>.FailureResult(ex.ToString());
                 return BadRequest(responseModel);
             }
         }

@@ -13,9 +13,9 @@ public class BL_BLog
         _dA_Blog = dA_Blog;
     }
 
-    public async Task<Result<List<BlogModel>>> GetBlog(int pageNo, int pageSize)
+    public async Task<Result<BlogResponseModel>> GetBlog(int pageNo, int pageSize)
     {
-        var responseModel = new Result<List<BlogModel>>();
+        var responseModel = new Result<BlogResponseModel>();
         try
         {
             if (pageNo < 0)
@@ -26,7 +26,7 @@ public class BL_BLog
         }
         catch (Exception ex)
         {
-            responseModel = Result<List<BlogModel>>.FailureResult(ex.ToString());
+            responseModel = Result<BlogResponseModel>.FailureResult(ex.ToString());
         }
         return responseModel;
     }

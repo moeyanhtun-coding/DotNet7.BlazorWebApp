@@ -1,5 +1,6 @@
 ﻿using DotNet7.BlazorWebApp.WebApi.Database;
 using DotNet7.BlazorWebApp.WebApi.Models.Blog;
+using DotNet7.BlazorWebApp.WebApi.Models.PageSetting;
 using DotNet7.BlazorWebApp.WebApi.ResponseModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,20 +15,25 @@ public class DA_Blog
         _context = context;
     }
 
-    public async Task<Result<List<BlogModel>>> GetBlog(int pageNo, int pageSize)
+    public async Task<Result<BlogResponseModel>> GetBlog(int pageNo, int pageSize)
     {
-        var responseModel = new Result<List<BlogModel>>();
+        var model = new BlogResponseModel();
+        var responseModel = new Result<BlogResponseModel>();
         try
         {
             var query = _context.Blogs.AsNoTracking();
             (int totalCount, int pageCount) = await query.PageCountAsync(pageSize);
             var lst = await query.Pagination(pageNo, pageSize).ToListAsync();
             var data = lst.Select(x => x.Change()).ToList();
-            responseModel = Result<List<BlogModel>>.SuccessResult(data);
+
+            model.DataList = data;
+            model.PageSettingModel = new PageSettingModel(pageNo, pageSize, totalCount, pageCount);
+
+            responseModel = Result<BlogResponseModel>.SuccessResult(model);
         }
         catch (Exception ex)
         {
-            responseModel = Result<List<BlogModel>>.FailureResult(ex.ToString());
+            responseModel = Result<BlogResponseModel>.FailureResult(ex.ToString());
         }
         return responseModel;
     }
@@ -88,7 +94,7 @@ public class DA_Blog
                 item.BlogAuthor = reqModel.BlogAuthor;
             if (!string.IsNullOrEmpty(reqModel.BlogContent))
                 item.BlogContent = reqModel.BlogContent;
-            #endregion 
+            #endregion
 
             _context.Entry(item).State = EntityState.Modified;
             int result = await _context.SaveChangesAsync();
@@ -108,7 +114,7 @@ public class DA_Blog
         try
         {
             var item = await _context.Blogs.AsNoTracking().FirstOrDefaultAsync(x => x.BlogId == id);
-            if (item == null) 
+            if (item == null)
             {
                 responseModel = Result<string>.FailureResult();
                 goto Result;
