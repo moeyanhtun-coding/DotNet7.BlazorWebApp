@@ -2,22 +2,30 @@
 
 <MudSimpleTable Style="overflow-x: auto;">
     <thead>
-        <tr>
-            @foreach (var h in headings)
-            {
-                <th>@h</th>
-            }
-        </tr>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Action</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var row in rows)
-        {
-            <tr>
-                @foreach (var x in row.Split())
-                {
-                    <td>@x</td>
-                }
-            </tr>
-        }
+    @foreach (var row in rows)
+    {
+        <tr>
+            <td>
+                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="OnButtonClicked">Delete</MudButton>
+            </td>
+        </tr>
+    }
     </tbody>
 </MudSimpleTable>
+
+
+<style>
+    .my-custom-class {
+        backdrop-filter: blur(10px);
+    }
+</style>
