@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet7.BlazorWebApp", "DotNet7.BlazorWebApp\DotNet7.BlazorWebApp.csproj", "{58519883-AA49-4465-B73C-711BD09EAEB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet7.BlazorWebApp", "DotNet7.BlazorWebApp\DotNet7.BlazorWebApp.csproj", "{58519883-AA49-4465-B73C-711BD09EAEB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet7.BlazorWebApp.WebApi", "DotNet7.BlazorWebApp.WebApi\DotNet7.BlazorWebApp.WebApi.csproj", "{B8C1AF1C-494B-4A21-9D69-26B038C04DBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet7.BlazorWebApp.WebApi", "DotNet7.BlazorWebApp.WebApi\DotNet7.BlazorWebApp.WebApi.csproj", "{B8C1AF1C-494B-4A21-9D69-26B038C04DBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
