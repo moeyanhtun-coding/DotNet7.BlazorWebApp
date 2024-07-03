@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet7.BlazorWebApp", "Dot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet7.BlazorWebApp.WebApi", "DotNet7.BlazorWebApp.WebApi\DotNet7.BlazorWebApp.WebApi.csproj", "{B8C1AF1C-494B-4A21-9D69-26B038C04DBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet7.BlazorWebApp.BlazorServerApp", "DotNet7.BlazorWebApp.BlazorServerApp\DotNet7.BlazorWebApp.BlazorServerApp.csproj", "{F3A48202-30C8-4C55-AECE-51BB20AF0929}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B8C1AF1C-494B-4A21-9D69-26B038C04DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8C1AF1C-494B-4A21-9D69-26B038C04DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8C1AF1C-494B-4A21-9D69-26B038C04DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A48202-30C8-4C55-AECE-51BB20AF0929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A48202-30C8-4C55-AECE-51BB20AF0929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A48202-30C8-4C55-AECE-51BB20AF0929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A48202-30C8-4C55-AECE-51BB20AF0929}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

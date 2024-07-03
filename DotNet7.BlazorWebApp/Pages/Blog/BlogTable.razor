@@ -16,31 +16,12 @@
     {
         <tr>
             <td>
-                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="OnButtonClicked">Delete</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="DeleteButton">Delete</MudButton>
             </td>
         </tr>
     }
     </tbody>
 </MudSimpleTable>
-
-<MudCarousel Class="mud-width-full" Style="height:200px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
-    <MudCarouselItem Transition="Transition.Fade" Color="@Color.Primary">
-        <div class="d-flex" style="height:100%">
-            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem Transition="Transition.Fade" Color="@Color.Secondary">
-        <div class="d-flex" style="height:100%">
-            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem Transition="Transition.Fade">
-        <div class="d-flex" style="height:100%">
-            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Color="@Color.Primary" Size="@Size.Large" />
-        </div>
-    </MudCarouselItem>
-</MudCarousel>
-
 
 <style>
     .my-custom-class {

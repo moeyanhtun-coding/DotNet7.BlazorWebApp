@@ -18,7 +18,7 @@ namespace DotNet7.BlazorWebApp.Pages.Blog
         string state = "Message box hasn't been opened yet";
 
 
-        private async void OnButtonClicked()
+        private async void DeleteButton()
         {
             var options = new DialogOptions
             {
@@ -28,8 +28,8 @@ namespace DotNet7.BlazorWebApp.Pages.Blog
                 ClassBackground = "my-custom-class"
             };
             bool? result = await DialogService.ShowMessageBox(
-                "Warning",
-                "Deleting can not be undone!",
+                "Delete",
+                "Are you sure want to delete?",
                 yesText: "Delete!", cancelText: "Cancel", options: options);
             state = result == null ? "Canceled" : "Deleted!";
             StateHasChanged();
