@@ -1,0 +1,45 @@
+﻿@page "/blog/table";
+
+
+<h3>BlogTable</h3>
+
+@if(lst is not null)
+{
+    <MudSimpleTable Style="overflow-x: auto;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Blog Title</th>
+                <th>Blog Author</th>
+                <th>Blog Content</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach( var item in lst)
+            {
+                <tr>
+                    <td>@item.BlogId</td>
+                    <td>@item.BlogTitle</td>
+                    <td>@item.BlogAuthor</td>
+                    <td>@item.BlogContent</td>
+                </tr>
+            }
+        </tbody>
+    </MudSimpleTable>
+}
+
+@code {
+    private List<TblBlogs>? lst;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await List();
+    }
+
+    private async Task List()
+    {
+        lst = await _db.Blogs.OrderByDescending(x => x.BlogId).Take(10).ToListAsync();
+    }
+
+}
