@@ -3,7 +3,17 @@
 
 <h3>BlogTable</h3>
 
-@if(lst is not null)
+<MudPaper Class="p-4">
+    <MudText Typo="Typo.body1">Blog Form</MudText>
+    <MudForm Spacing="1">
+        <MudTextField T="string" Label="Blog Title" @bind-Value="requestModel.BlogTitle" />
+        <MudTextField T="string" Label="Blog Author" @bind-Value="requestModel.BlogAuthor" />
+        <MudTextField T="string" Label="Blog Content" @bind-Value="requestModel.BlogContent" />
+    </MudForm>
+<MudButton Class="mt-4" Variant="Variant.Filled" Color="Color.Success" OnClick="Save">Save</MudButton>
+</MudPaper>
+
+@if (lst is not null)
 {
     <MudSimpleTable Style="overflow-x: auto;">
         <thead>
@@ -16,13 +26,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach( var item in lst)
+            @foreach (var item in lst)
             {
                 <tr>
                     <td>@item.BlogId</td>
                     <td>@item.BlogTitle</td>
                     <td>@item.BlogAuthor</td>
                     <td>@item.BlogContent</td>
+                    <td>
+                        <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="()=>Edit(item.BlogId)">Edit</MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="()=>Delete(item.BlogId)">Delete</MudButton>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -30,6 +44,7 @@
 }
 
 @code {
+    private TblBlogs requestModel = new();
     private List<TblBlogs>? lst;
 
     protected override async Task OnInitializedAsync()
@@ -39,7 +54,40 @@
 
     private async Task List()
     {
+        await Task.Delay(3000);
         lst = await _db.Blogs.OrderByDescending(x => x.BlogId).Take(10).ToListAsync();
     }
 
+    private async Task Save()
+    {
+        if (requestModel.BlogId == 0)
+        {
+            await _db.Blogs.AddAsync(requestModel);
+        }
+        else
+        {
+            var item = await _db.Blogs.AsNoTracking().FirstOrDefaultAsync(x => x.BlogId == requestModel.BlogId);
+            item.BlogTitle = requestModel.BlogTitle;
+            item.BlogAuthor = requestModel.BlogAuthor;
+            item.BlogContent = requestModel.BlogContent;
+        }
+        await _db.SaveChangesAsync();
+        requestModel = new();
+    }
+    private async Task Edit(int id)
+    {
+        var item = await _db.Blogs.FirstOrDefaultAsync(x => x.BlogId == id);
+        if (item is null) return;
+        requestModel = item;
+        StateHasChanged();
+    }
+
+    private async Task Delete(int id)
+    {
+        var item = await _db.Blogs.AsNoTracking().FirstOrDefaultAsync(x => x.BlogId == id);
+        if (item is null) return;
+        _db.Blogs.Remove(item);
+        await _db.SaveChangesAsync();
+        StateHasChanged();
+    }
 }
