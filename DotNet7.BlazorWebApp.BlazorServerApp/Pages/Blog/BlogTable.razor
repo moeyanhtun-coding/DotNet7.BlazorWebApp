@@ -1,4 +1,5 @@
 ﻿@page "/blog/table";
+@inject IDialogService DialogService;
 
 
 <h3>BlogTable</h3>
@@ -35,13 +36,19 @@
                     <td>@item.BlogContent</td>
                     <td>
                         <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="()=>Edit(item.BlogId)">Edit</MudButton>
-                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="()=>Delete(item.BlogId)">Delete</MudButton>
+                        <MudButton Variant="Variant.Filled"  Color="Color.Error" OnClick="()=>Delete(item.BlogId)">Delete</MudButton>
                     </td>
                 </tr>
             }
         </tbody>
     </MudSimpleTable>
 }
+
+<style>
+    .my-custom-class {
+        backdrop-filter: blur(10px);
+    }
+</style>
 
 @code {
     private TblBlogs requestModel = new();
@@ -73,6 +80,7 @@
         }
         await _db.SaveChangesAsync();
         requestModel = new();
+        await List();
     }
     private async Task Edit(int id)
     {
@@ -84,10 +92,23 @@
 
     private async Task Delete(int id)
     {
-        var item = await _db.Blogs.AsNoTracking().FirstOrDefaultAsync(x => x.BlogId == id);
+        string state = "Message box hasn't been opened yet";
+        var options = new DialogOptions
+            {
+                CloseOnEscapeKey = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.ExtraSmall
+            };
+        bool? result = await DialogService.ShowMessageBox(
+            "Delete",
+            "Are you sure want to delete?",
+            yesText: "Delete!", cancelText: "Cancel", options: options);
+        state = result == null ? "Canceled" : "Deleted!";
+        if (state == "Canceled") return;
+        var item = await _db.Blogs.FirstOrDefaultAsync(x => x.BlogId == id);
         if (item is null) return;
         _db.Blogs.Remove(item);
         await _db.SaveChangesAsync();
-        StateHasChanged();
+        await List();
     }
 }
